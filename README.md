@@ -1,4 +1,4 @@
-## Show Code##
+## Show Code ##
 
 show_code provides a quick way to show ruby method source codes in terminal.
 
