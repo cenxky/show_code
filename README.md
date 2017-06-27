@@ -15,7 +15,7 @@ __NOTE__: show_code current version *require* Ruby v1.9.0 or later.
 You can use show_code in `console c` or `irb`
 
 ```ruby
-require "show_code" # just when irb
+require "show_code" # just when use irb
 ShowCode method_object
 # or
 ShowCode method_string
@@ -37,7 +37,7 @@ ShowCode ShowCode::Code.instance_method(:greet)
 
 ```
 #### open resource file
-Sometimes, we wanna open the resource file to edit, as default `geidt` will open the file.
+Sometimes, we wanna open the resource file to edit, as default `gedit` will open the file.
 
 ```ruby
 ShowCode.open 'ShowCode::Code.new.greet'
