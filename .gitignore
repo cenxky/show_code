@@ -1,0 +1,48 @@
+# Default
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+## MAC OS
+.DS_Store
+
+## TEXTMATE
+*.tmproj
+tmtags
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.swp
+
+## RUBYMINE
+.idea
+
+## PROJECT::GENERAL
+coverage
+rdoc
+pkg
+.ruby-version
+gemfiles/*.gemfile.lock
+Gemfile.lock
+/tmp
+/.bundle
+/gemfiles/.bundle
+
+## PROJECT::RVM
+.rvmrc
+
+# PROJECT::RBENV
+.ruby-gemset
