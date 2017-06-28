@@ -1,6 +1,7 @@
 ## Show Code ##
 
 show_code provides a quick way to show ruby method source codes in terminal.
+
 ![show_code_example](https://user-images.githubusercontent.com/10070670/27630537-617eb7a0-5c28-11e7-90b8-e76b147dec2e.png)
 
 __NOTE__: show_code current version *require* Ruby v1.9.0 or later.
