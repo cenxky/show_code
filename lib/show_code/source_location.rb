@@ -6,7 +6,7 @@ module ShowCode
 
     def initialize(target)
       if target.is_a?(String)
-        arr    = target.split('.').map{|t| t == 'new' ? 'allocate' : t}
+        arr    = target.gsub('.new.', '.allocate.').split('.')
         klass  = arr[0..-2].join('.')
         method = arr[-1]
 

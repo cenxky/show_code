@@ -5,16 +5,17 @@ require_relative 'show_code/code'
 
 module ShowCode
 
-  def self.parse(obj)
+  def self.parse(obj, opts = {})
     sol  = SourceLocation.new obj
     code = Code.new sol
-    puts code.content
+    puts code.highlighted opts
     sol.method
   end
 
   def self.open(obj)
     sol  = SourceLocation.new obj
     file = sol.file
+
     %x[gedit #{file}]
     if $?.success?
       'File has opened via gedit!'
@@ -28,8 +29,8 @@ end
 # ShowCode() runs like ShowCode.parse()
 module Kernel
 
-  def ShowCode(target)
-    ShowCode.parse target
+  def ShowCode(target, opts = {})
+    ShowCode.parse target, opts
   end
   module_function :ShowCode
 
