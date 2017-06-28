@@ -1,4 +1,7 @@
-Dir[File.dirname(__FILE__) + "/show_code/*.rb"].each { |file| require(file) }
+require_relative 'show_code/version'
+require_relative 'show_code/source_location'
+require_relative 'show_code/syntax_exception'
+require_relative 'show_code/code'
 
 module ShowCode
 

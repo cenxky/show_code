@@ -1,14 +1,14 @@
 module ShowCode
-  class SourceLocation
+  class SourceLocationError < StandardError; end
 
+  class SourceLocation
     attr :method, :file, :line
 
     def initialize(target)
       if target.is_a?(String)
-
-        target = target.gsub! '.new', '.allocate'
-        klass  = target.split('.')[0..-2].join('.')
-        method = target.split('.').last
+        arr    = target.split('.').map{|t| t == 'new' ? 'allocate' : t}
+        klass  = arr[0..-2].join('.')
+        method = arr[-1]
 
         # refer:
         # Object.instance_method(:method).bind(User).call(:current).source_location
@@ -19,10 +19,14 @@ module ShowCode
       elsif target.is_a?(Method) || target.is_a?(UnboundMethod)
         @method = target
       else
-        raise ArgumentError, 'bad argument (expected Method object or String)'
+        raise ArgumentError, 'bad argument (expected Method object or Chaining string)'
       end
 
-      @file, @line = @method.source_location
+      if @method.source_location.nil?
+        raise SourceLocationError, 'cannot find the method source location'
+      else
+        @file, @line = @method.source_location
+      end
 
     end
 

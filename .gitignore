@@ -46,3 +46,4 @@ Gemfile.lock
 
 # PROJECT::RBENV
 .ruby-gemset
+*.gem
