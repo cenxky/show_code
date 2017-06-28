@@ -12,7 +12,7 @@ __NOTE__: show_code current version *require* Ruby v1.9.0 or later.
     $ gem show_code
 
 ### Usage ###
-You can use show_code in `console c` or `irb`
+You will be able use show_code in `rails c` or `irb`
 
 ```ruby
 require "show_code" # just when use irb
