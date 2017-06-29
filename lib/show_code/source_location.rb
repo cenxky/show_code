@@ -1,5 +1,6 @@
 module ShowCode
   class SourceLocationError < StandardError; end
+  class ModuleNotFound < StandardError; end
 
   class SourceLocation
     attr :method, :file, :line
@@ -7,8 +8,8 @@ module ShowCode
     def initialize(target)
       if target.is_a?(String)
         arr    = target.gsub('.new.', '.allocate.').split('.')
-        klass  = arr[0..-2].join('.')
-        method = arr[-1]
+        klass, method = arr[0..-2].join('.'), arr[-1]
+        klass, method = based_on_klass_method(target) if arr.size == 1 # if hope view Class/Module source codes
 
         # refer:
         # Object.instance_method(:method).bind(User).call(:current).source_location
@@ -23,11 +24,29 @@ module ShowCode
       end
 
       if @method.source_location.nil?
-        raise SourceLocationError, 'cannot find the method source location'
+        raise SourceLocationError, 'Could not find the method source location'
       else
-        @file, @line = @method.source_location
+        @file, line = @method.source_location
+        @line ||= line
       end
 
+    end
+
+    private
+
+    # find class first singleton method or first instance_method
+    def based_on_klass_method(klass)
+      _class = eval(klass)
+
+      regroup_klass = if !(method = _class.instance_methods(:false)[0]).nil?
+        klass + '.allocate'
+      elsif !(method = _class.methods(:false)[0]).nil?
+        klass
+      else
+        raise ModuleNotFound, "Could not find #{klass}"
+      end
+
+      @line = 0; [regroup_klass, method]
     end
 
   end

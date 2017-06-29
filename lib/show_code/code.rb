@@ -6,13 +6,23 @@ module ShowCode
 
     def initialize(location)
       @file         = location.file
-      @line         = location.line
       file_lines    = File.readlines(@file) if @file
 
+      @line         = real_start_line file_lines, location.line
       related_lines = file_lines[(@line - 1)..-1] || []
+
       codes         = extract_method_code related_lines
       @lines        = codes.count
       @content      = codes.join
+    end
+
+    def real_start_line(file_lines, line)
+      return line unless line.zero?
+
+      file_lines.each do |loc|
+        line += 1
+        return line if /^\s*(class|module)\s+[A-Z]/ === loc
+      end
     end
 
     def extract_method_code(related_lines)
@@ -49,7 +59,7 @@ module ShowCode
       line_number = line - 1
       output.split("\n").map do |loc|
         line_number += 1
-        "\e[33m#{line_number}\e[0m #{loc}"
+        "\e[33m#{line_number.to_s.ljust(4, ' ')}\e[0m#{loc}"
       end.join("\n")
     end
 
