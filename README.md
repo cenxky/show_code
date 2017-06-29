@@ -1,6 +1,6 @@
 ## Show Code ##
 
-show_code provides a quick way to show ruby method source codes in terminal.
+show_code provides an easy way to show your ruby method source codes in terminal.
 
 ![show_code_example](https://user-images.githubusercontent.com/10070670/27630537-617eb7a0-5c28-11e7-90b8-e76b147dec2e.png)
 
@@ -21,7 +21,7 @@ You will be able use show_code in `rails c` or `irb`.
 require "show_code" # just when use irb
 ShowCode method_object
 # or
-ShowCode method_string
+ShowCode 'YourClassOrModule.your_method'
 ```
 
 ### Examples ###
@@ -48,7 +48,7 @@ ShowCode.open 'ShowCode::Code.new.greet'
 ```
 
 ### TODO ###
-- Add more statistic analysis in output
+- Add more statistic analysis for output
 
 ### License ###
 Released under the [MIT](http://opensource.org/licenses/MIT) license. See LICENSE file for details.

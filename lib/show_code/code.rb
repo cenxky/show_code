@@ -49,7 +49,7 @@ module ShowCode
       line_number = line - 1
       output.split("\n").map do |loc|
         line_number += 1
-        "\e[33m%i\e[0m #{loc}" % line_number
+        "\e[33m#{line_number}\e[0m #{loc}"
       end.join("\n")
     end
 
